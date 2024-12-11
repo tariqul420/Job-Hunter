@@ -42,7 +42,6 @@ const Footer = () => {
                     <p>Login/Register</p>
                     <p>All movies</p>
                     <p>Add Movies</p>
-                    <p>My Favorites</p>
                 </div>
                 <div className="space-y-4">
                     <h2 className="font-semibold text-2xl">Quick Link</h2>

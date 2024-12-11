@@ -4,7 +4,7 @@ import { useState } from "react";
 // react icons
 import { CiMenuFries } from "react-icons/ci";
 import logo from "../../assets/job.png"
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
 
@@ -31,7 +31,9 @@ const Navbar = () => {
 
             <div className="items-center gap-[20px] flex">
                 <button className="font-medium underline">
-                    Register
+                    <Link to="/register">
+                        Register
+                    </Link>
                 </button>
                 <button
                     className="px-4 py-3 rounded-lg font-medium text-white bg-color-primary">Sign

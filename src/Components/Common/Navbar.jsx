@@ -36,8 +36,10 @@ const Navbar = () => {
                     </Link>
                 </button>
                 <button
-                    className="px-4 py-3 rounded-lg font-medium text-white bg-color-primary">Sign
-                    In
+                    className="px-4 py-3 rounded-lg font-medium text-white bg-color-primary">
+                    <Link to='/sign-in'>
+                        Sign In
+                    </Link>
                 </button>
 
                 <CiMenuFries className="text-[1.8rem] mr-1 text-[#424242]c cursor-pointer lg:hidden flex"

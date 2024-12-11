@@ -1,14 +1,15 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // react icons
 import { CiMenuFries } from "react-icons/ci";
 import logo from "../../assets/job.png"
 import { Link, NavLink } from "react-router-dom";
+import { authContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
-
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+    const { user, logoutUser } = useContext(authContext)
 
     return (
         <nav
@@ -30,18 +31,30 @@ const Navbar = () => {
             </ul>
 
             <div className="items-center gap-[20px] flex">
-                <Link to='/register'>
-                    <button className="font-medium underline hover:text-color-primary">
-                        Register
-                    </button>
-                </Link>
+                {
+                    user ? (
+                        <button
+                            onClick={logoutUser}
+                            className="px-6 py-3 rounded-lg font-medium text-white bg-color-text hover:bg-color-primary transition-all duration-300">
+                            Sign Out
+                        </button>
+                    ) : (
+                        <>
+                            <Link to='/register'>
+                                <button className="font-medium underline hover:text-color-primary">
+                                    Register
+                                </button>
+                            </Link>
 
-                <Link to='/sign-in'>
-                    <button
-                        className="px-6 py-3 rounded-lg font-medium text-white bg-color-text hover:bg-color-primary transition-all duration-300">
-                        Sign In
-                    </button>
-                </Link>
+                            <Link to='/sign-in'>
+                                <button
+                                    className="px-6 py-3 rounded-lg font-medium text-white bg-color-text hover:bg-color-primary transition-all duration-300">
+                                    Sign In
+                                </button>
+                            </Link>
+                        </>
+                    )
+                }
 
                 <CiMenuFries className="text-[1.8rem] mr-1 text-[#424242]c cursor-pointer lg:hidden flex"
                     onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)} />

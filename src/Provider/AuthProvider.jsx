@@ -1,12 +1,21 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/Firebase";
-import AuthContext from "./AuthContext";
+// import AuthContext from "./AuthContext";
 import PropTypes from "prop-types";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const authContext = createContext(null)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    console.log(user);
+
+    const socialAuth = (provider) => {
+        setLoading(true)
+        return signInWithPopup(auth, provider)
+    }
 
     const createUser = (email, password) => {
         setLoading(true)
@@ -19,6 +28,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const logoutUser = () => {
+        setLoading(true)
         return signOut(auth)
     }
 
@@ -41,13 +51,14 @@ const AuthProvider = ({ children }) => {
         createUser,
         loginUser,
         logoutUser,
+        socialAuth,
         loading,
         user
     }
     return (
-        <AuthContext.Provider value={authData}>
+        <authContext.Provider value={authData}>
             {children}
-        </AuthContext.Provider>
+        </authContext.Provider>
     );
 };
 

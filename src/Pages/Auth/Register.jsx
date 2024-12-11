@@ -1,9 +1,49 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../../assets/Icon/google.png"
 import Lottie from "lottie-react";
 import space from "../../assets/Lottie/space.json"
+import { useContext } from "react";
+import { authContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
+    const { createUser } = useContext(authContext)
+    const navigate = useNavigate()
+
+    const handelRegister = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const name = form.name.value
+        const email = form.email.value
+        const password = form.password.value
+        const rePassword = form.rePassword.value
+
+        console.log(name, email, password, rePassword);
+
+        createUser(email, password)
+            .then(() => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Register Successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/')
+            })
+            .catch(error => {
+                if (error.code === 'auth/email-already-in-use') {
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "user Already Exist",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
     return (
         <div className="flex gap-8 my-20">
             <div className="flex flex-col w-[60%] items-end justify-center">
@@ -25,7 +65,7 @@ const Register = () => {
                     </div>
                 </div>
 
-                <form className="space-y-4" action="">
+                <form onSubmit={handelRegister} className="space-y-4" action="">
                     <div className="w-[435px] mx-auto">
                         <label htmlFor="name" className="text-[15px] font-[400]">
                             Name <span className="text-red-500">*</span>
@@ -43,7 +83,7 @@ const Register = () => {
                             Email <span className="text-red-500">*</span>
                         </label>
                         <input
-                            type="text"
+                            type="email"
                             name="email"
                             placeholder="Your email"
                             className="border-[#e5eaf2] border rounded-md outline-none px-4 w-full mt-1 py-3 focus:border-[#3B9DF8] transition-colors duration-300"
@@ -55,7 +95,7 @@ const Register = () => {
                             Password <span className="text-red-500">*</span>
                         </label>
                         <input
-                            type="text"
+                            type="password"
                             name="password"
                             placeholder="********"
                             className="border-[#e5eaf2] border rounded-md outline-none px-4 w-full mt-1 py-3 focus:border-[#3B9DF8] transition-colors duration-300"
@@ -67,7 +107,7 @@ const Register = () => {
                             Re-Password <span className="text-red-500">*</span>
                         </label>
                         <input
-                            type="text"
+                            type="password"
                             name="rePassword"
                             placeholder="********"
                             className="border-[#e5eaf2] border rounded-md outline-none px-4 w-full mt-1 py-3 focus:border-[#3B9DF8] transition-colors duration-300"

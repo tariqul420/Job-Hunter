@@ -1,9 +1,44 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../../assets/Icon/google.png"
 import Lottie from "lottie-react";
 import spaceLogIn from "../../assets/Lottie/space-sign-in.json"
+import { useContext } from "react";
+import { authContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
+    const { loginUser } = useContext(authContext)
+    const navigate = useNavigate()
+
+    const handelSignIn = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
+        console.log(email, password);
+
+        loginUser(email, password)
+            .then(() => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Login Successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/')
+            })
+            .catch(() => {
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Email & Password not valid",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+    }
+
     return (
         <div className="flex gap-8 my-20">
             <div className="flex flex-col w-[60%] items-end justify-center">
@@ -25,13 +60,13 @@ const SignIn = () => {
                     </div>
                 </div>
 
-                <form className="space-y-4" action="">
+                <form onSubmit={handelSignIn} className="space-y-4" action="">
                     <div className="w-[435px] mx-auto">
                         <label htmlFor="email" className="text-[15px] font-[400]">
                             Email <span className="text-red-500">*</span>
                         </label>
                         <input
-                            type="text"
+                            type="email"
                             name="email"
                             placeholder="Your email"
                             className="border-[#e5eaf2] border rounded-md outline-none px-4 w-full mt-1 py-3 focus:border-[#3B9DF8] transition-colors duration-300"
@@ -43,7 +78,7 @@ const SignIn = () => {
                             Password <span className="text-red-500">*</span>
                         </label>
                         <input
-                            type="text"
+                            type="password"
                             name="password"
                             placeholder="********"
                             className="border-[#e5eaf2] border rounded-md outline-none px-4 w-full mt-1 py-3 focus:border-[#3B9DF8] transition-colors duration-300"
@@ -58,7 +93,7 @@ const SignIn = () => {
                         Don&apos;t have an Account?{" "}
                     </span>
                     <span>
-                        <Link to="/sign-in" className="text-[1rem] hover:text-color-primary font-[500]">
+                        <Link to="/register" className="text-[1rem] hover:text-color-primary font-[500]">
                             Register
                         </Link>
                     </span>

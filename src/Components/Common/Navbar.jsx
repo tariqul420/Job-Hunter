@@ -30,17 +30,18 @@ const Navbar = () => {
             </ul>
 
             <div className="items-center gap-[20px] flex">
-                <button className="font-medium underline">
-                    <Link to="/register">
+                <Link to='/register'>
+                    <button className="font-medium underline hover:text-color-primary">
                         Register
-                    </Link>
-                </button>
-                <button
-                    className="px-4 py-3 rounded-lg font-medium text-white bg-color-primary">
-                    <Link to='/sign-in'>
+                    </button>
+                </Link>
+
+                <Link to='/sign-in'>
+                    <button
+                        className="px-6 py-3 rounded-lg font-medium text-white bg-color-text hover:bg-color-primary transition-all duration-300">
                         Sign In
-                    </Link>
-                </button>
+                    </button>
+                </Link>
 
                 <CiMenuFries className="text-[1.8rem] mr-1 text-[#424242]c cursor-pointer lg:hidden flex"
                     onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)} />

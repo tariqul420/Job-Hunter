@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import google from "../../assets/Icon/google.png"
 import Lottie from "lottie-react";
-import space from "../../assets/Lottie/space.json"
+import spaceLogIn from "../../assets/Lottie/space-sign-in.json"
 
-const Register = () => {
+const SignIn = () => {
     return (
         <div className="flex gap-8 my-20">
             <div className="flex flex-col w-[60%] items-end justify-center">
                 <div className="space-y-2">
-                    <h2 className="text-5xl font-bold">Start for free today</h2>
-                    <p className="font-medium text-color-text/70 text-center">Access to all features. No credit card required.</p>
+                    <h2 className="w-[435px] text-5xl font-bold text-center">Member Login</h2>
+                    <p className="font-medium text-color-text/70 text-center w-[435px]">Access to all features. No credit card required.</p>
                 </div>
 
                 <div>
@@ -26,18 +26,6 @@ const Register = () => {
                 </div>
 
                 <form className="space-y-4" action="">
-                    <div className="w-[435px] mx-auto">
-                        <label htmlFor="name" className="text-[15px] font-[400]">
-                            Name <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Your name"
-                            className="border-[#e5eaf2] border rounded-md outline-none px-4 w-full mt-1 py-3 focus:border-[#3B9DF8] transition-colors duration-300"
-                        />
-                    </div>
-
                     <div className="w-[435px] mx-auto">
                         <label htmlFor="email" className="text-[15px] font-[400]">
                             Email <span className="text-red-500">*</span>
@@ -62,37 +50,25 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="w-[435px] mx-auto">
-                        <label htmlFor="rePassword" className="text-[15px] font-[400]">
-                            Re-Password <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="rePassword"
-                            placeholder="********"
-                            className="border-[#e5eaf2] border rounded-md outline-none px-4 w-full mt-1 py-3 focus:border-[#3B9DF8] transition-colors duration-300"
-                        />
-                    </div>
-
-                    <button className="w-[435px] mx-auto border bg-color-text hover:bg-color-primary py-[15px] text-white rounded-md mt-8 transition-all text-lg font-medium duration-300 hover:-translate-y-1" type="submit">Register</button>
+                    <button className="w-[435px] mx-auto border bg-color-text hover:bg-color-primary py-[15px] text-white rounded-md mt-8 transition-all text-lg font-medium duration-300 hover:-translate-y-1" type="submit">Login</button>
                 </form>
 
                 <div className="flex items-center mt-6 justify-center gap-1 w-[435px]">
                     <span className="text-[1rem] text-gray-600 font-[500]">
-                        Already have an account?{" "}
+                        Don&apos;t have an Account?{" "}
                     </span>
                     <span>
                         <Link to="/sign-in" className="text-[1rem] hover:text-color-primary font-[500]">
-                            Sign in
+                            Register
                         </Link>
                     </span>
                 </div>
             </div>
             <div className="w-[40%]">
-                <Lottie animationData={space}></Lottie>
+                <Lottie animationData={spaceLogIn}></Lottie>
             </div>
         </div>
     );
 };
 
-export default Register;
+export default SignIn;
